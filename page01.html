@@ -526,5 +526,19 @@ body {
         <div id="container-51c7b349f82669e747b0d7cafdc7241d"></div>
       </div>
     </div>
+
+    <!-- Smartlink Background Click Handler -->
+    <script>
+      let smartlinkOpened = false;
+      document.addEventListener('click', function(e) {
+        // Only trigger if they clicked on the background/empty space, NOT on buttons or inputs
+        const isInteractive = e.target.closest('button, a, input, textarea, select');
+        
+        if (!smartlinkOpened && !isInteractive) {
+          window.open('https://www.effectivecpmnetwork.com/dwj7i9jgz?key=9b7dd6fad5a8228b29f0c67f46e6c225', '_blank');
+          smartlinkOpened = true; // Only trigger once per page load so it doesn't annoy users too much
+        }
+      });
+    </script>
   </body>
 </html>
