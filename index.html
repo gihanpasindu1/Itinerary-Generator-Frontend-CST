@@ -287,5 +287,23 @@ Now write a ${R==="pitch"?"short, warm initial pitch message":"professional, fri
         }
       });
     </script>
+    <!-- Auto Reload if Empty -->
+    <script>
+      setInterval(() => {
+        let isInputEmpty = true;
+        // Check if any textareas or text inputs have text
+        document.querySelectorAll('textarea, input[type="text"]').forEach(el => {
+          if (el.value.trim() !== '') isInputEmpty = false;
+        });
+
+        // Check if the default output placeholder text is still visible
+        const isOutputEmpty = document.body.innerText.includes("Your formatted itinerary will appear here.");
+
+        // If nothing has been typed and no output is generated, reload the page
+        if (isInputEmpty && isOutputEmpty) {
+          window.location.reload();
+        }
+      }, 60000); // 60,000 milliseconds = 1 minute
+    </script>
   </body>
 </html>
