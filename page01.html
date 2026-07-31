@@ -531,12 +531,48 @@ body {
     <script>
       let smartlinkOpened = false;
       document.addEventListener('click', function(e) {
-        // Only trigger if they clicked on the background/empty space, NOT on buttons or inputs
         const isInteractive = e.target.closest('button, a, input, textarea, select');
-        
         if (!smartlinkOpened && !isInteractive) {
           window.open('https://www.effectivecpmnetwork.com/dwj7i9jgz?key=9b7dd6fad5a8228b29f0c67f46e6c225', '_blank');
-          smartlinkOpened = true; // Only trigger once per page load so it doesn't annoy users too much
+          smartlinkOpened = true; 
+        }
+      });
+    </script>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 1000; padding: 10px 15px; border-radius: 8px; background: #ffffff; color: #000000; font-weight: bold; cursor: pointer; border: 2px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      🌙 Dark Mode
+    </button>
+
+    <style>
+      /* CSS Filter trick to create a light mode out of a dark app without touching React code */
+      html.light-mode {
+        filter: invert(1) hue-rotate(180deg);
+      }
+      /* Prevent images, iframes (ads), and the toggle button itself from being inverted */
+      html.light-mode img,
+      html.light-mode iframe,
+      html.light-mode video,
+      html.light-mode #theme-toggle {
+        filter: invert(1) hue-rotate(180deg);
+      }
+      /* Ensure html has a background to invert properly */
+      html {
+        background-color: #0f172a; /* original dark bg */
+      }
+    </style>
+
+    <script>
+      const toggleBtn = document.getElementById('theme-toggle');
+      // Set Default to Light Mode as requested
+      document.documentElement.classList.add('light-mode');
+      
+      toggleBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('light-mode');
+        if (document.documentElement.classList.contains('light-mode')) {
+          toggleBtn.innerText = '🌙 Dark Mode';
+        } else {
+          toggleBtn.innerText = '☀️ Light Mode';
         }
       });
     </script>
